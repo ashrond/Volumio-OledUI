@@ -1,6 +1,9 @@
 Inspired by: https://github.com/diehardsk/Volumio-OledUI
 
-This is a fork from diehrdsk/Volumio-OledUi
+### 14.04.2020 End of this Project
+---
+luma.oled is not compatible with python 2.7 anymore.
+migrated to python 3.5.2 -> [Maschine2501/NR1-UI](https://github.com/Maschine2501/NR1-UI)
 
 # Volumio-OledUI MK2
 
