@@ -1,3 +1,64 @@
+### Setup instructions
+If not done yet, set the local system time zone:
+
+sudo dpkg-reconfigure tzdata
+Step 1: System Preparation and Dependencies
+
+sudo apt-get update
+
+# Install required libraries and tools
+sudo apt-get install -y python3-dev python3-pip libfreetype6-dev libjpeg-dev build-essential python3-rpi.gpio python3-pycurl libssl-dev libcurl4-openssl-dev
+
+# Install setuptools, pip, and wheel for Python 3
+sudo pip3 install --upgrade setuptools pip wheel
+
+# Install required Python modules
+sudo pip3 install --upgrade socketIO-client-2 luma.oled
+Note: Step 1 needs to be done once and does not need to be repeated every time you update.
+
+Step 2: Clone the Repository and Set Up the Service
+
+# Clone the Volumio-OledUI repository
+git clone https://github.com/Maschine2501/Volumio-OledUI.git
+
+# Make the main Python script executable
+chmod +x ~/Volumio-OledUI/oledui.py
+
+# Copy the systemd service file to the appropriate directory
+sudo cp ~/Volumio-OledUI/oledui.service /lib/systemd/system/
+
+# Reload systemd to apply the new service
+sudo systemctl daemon-reload
+
+# Enable the service to start on boot
+sudo systemctl enable oledui.service
+Step 3: Configure the Volumio-OledUI Script
+If the OLED display is mounted upside down, edit the script to enable vertical flipping:
+
+Open the script for editing:
+
+nano ~/Volumio-OledUI/oledui.py
+Locate the FLIP_SCREEN variable at the top of the script and set it to True if needed:
+
+
+FLIP_SCREEN = True
+Save and exit (Ctrl + O, then Ctrl + X).
+
+Step 4: Reboot and Test
+Reboot the system:
+
+
+sudo reboot
+Verify the service is running:
+
+
+sudo systemctl status oledui.service
+If the service fails, review the logs:
+
+
+sudo journalctl -u oledui.service -f
+
+### -----------------------------------------------------------------------------------------------------------
 Inspired by: https://github.com/diehardsk/Volumio-OledUI
 
 ### 14.04.2020 End of this Project
